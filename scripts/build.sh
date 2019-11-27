@@ -1,5 +1,6 @@
 cd ../guardian_kernels/sanitizer
 ./build.sh
+make
 cd m5threads-master
 #make
 cd ../..

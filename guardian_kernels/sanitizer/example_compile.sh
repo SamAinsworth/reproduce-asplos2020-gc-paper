@@ -1,0 +1,2 @@
+#You need allow-multiple-definition to stop GCC from complaining about the redefinition of malloc and free. You need the static to run in gem5. The m5thread library is to run the guardian kernel threads, which unlike in the other guardian kernels uses shared memory with the main core (which is also why this is Aarch32, not Aarch64.
+arm-linux-gnueabi-gcc hello.c malloc.c -static -Wl,--allow-multiple-definition  -DUSE_PUBLIC_MALLOC_WRAPPERS -O3 -DGEM5 m5threads-master/pthread.c -march=armv7-a

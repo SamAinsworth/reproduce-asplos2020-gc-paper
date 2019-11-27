@@ -5,7 +5,7 @@ This repository contains artefacts and workflows
 to reproduce experiments from the ASPLOS 2020 paper 
 by S. Ainsworth and T. M. Jones
 
-"Software Prefetching for Indirect Memory Accesses"
+"The Guardian Council: Parallel Programmable Hardware Security"
 
 Hardware pre-requisities
 ========================

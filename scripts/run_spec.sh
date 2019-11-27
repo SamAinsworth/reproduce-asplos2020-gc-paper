@@ -24,6 +24,6 @@ do
   $BASE/scripts/gem5_scripts/run_rowhammer.sh "$BINA" "$ARGS" "$IN"
   $BASE/scripts/gem5_scripts/run_shadow.sh "$BINA" "$ARGS" "$IN"
   cd ../run_base_ref_armdlmalloc.0000
-  $BASE/scripts/gem5_scripts/run_sanitizer.sh "$BINB" "$ARGS" "$IN")  
+  $BASE/scripts/gem5_scripts/run_sanitizer.sh "$BINB" "$ARGS" "$IN") & 
 done
 cd $BASE/scripts

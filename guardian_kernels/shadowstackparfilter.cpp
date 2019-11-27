@@ -1,6 +1,6 @@
 #include <stack>
 #include <inttypes.h>
-#include "../util/m5/m5op.h"
+#include "../gem5-guardian/util/m5/m5op.h"
 #include <assert.h>
 #include <stdio.h>
 

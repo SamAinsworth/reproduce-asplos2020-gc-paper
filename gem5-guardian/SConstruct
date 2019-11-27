@@ -250,6 +250,7 @@ if not 'SWIG' in main_dict_keys:
 # as well
 main.AppendENVPath('PYTHONPATH', extra_python_paths)
 
+
 ########################################################################
 #
 # Mercurial Stuff.
@@ -653,6 +654,7 @@ if main['GCC'] or main['CLANG']:
     # we consistently violate
     main.Append(CCFLAGS=['-Wall', '-Wundef', '-Wextra',
                          '-Wno-sign-compare', '-Wno-unused-parameter'])
+    main.Append(CXXFLAGS=['-Wno-implicit-fallthrough'])                     
     # We always compile using C++11
     main.Append(CXXFLAGS=['-std=c++11'])
 else:

@@ -1,7 +1,7 @@
 #include <stdio.h>     
 #include <assert.h>
 #include <stdlib.h>    
-#include "../util/m5/m5op.h"
+#include "../gem5-guardian/util/m5/m5op.h"
 
 
 int main(int argc, char **argv) {

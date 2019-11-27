@@ -1,4 +1,5 @@
 cd ..
+BASE=$(pwd)
 mkdir specmnt
 mkdir SPEC
 sudo mount -o loop *.iso specmnt

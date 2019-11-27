@@ -62,6 +62,18 @@ class ArmLiveProcess : public LiveProcess
                    ObjectFile::Arch _arch);
     template<class IntType>
     void argsInit(int pageSize, ArmISA::IntRegIndex spIndex);
+
+
+    template<class IntType>
+    IntType armHwcap() const
+    {
+        return static_cast<IntType>(armHwcapImpl());
+    }
+
+    /**
+     * AT_HWCAP is 32-bit wide on AArch64 as well so we can
+     * safely return an uint32_t */
+    virtual uint32_t armHwcapImpl() const = 0;
 };
 
 class ArmLiveProcess32 : public ArmLiveProcess
@@ -71,6 +83,11 @@ class ArmLiveProcess32 : public ArmLiveProcess
                      ObjectFile::Arch _arch);
 
     void initState();
+
+    /** AArch32 AT_HWCAP */
+    uint32_t armHwcapImpl() const override;
+
+
 
   public:
 
@@ -87,6 +104,11 @@ class ArmLiveProcess64 : public ArmLiveProcess
                      ObjectFile::Arch _arch);
 
     void initState();
+
+        /** AArch64 AT_HWCAP */
+    uint32_t armHwcapImpl() const override;
+
+
 
   public:
 

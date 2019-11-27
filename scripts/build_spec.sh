@@ -11,6 +11,8 @@ cp spec_confs/aarch64.cfg SPEC/config
 cp spec_confs/arm-gem5-dlmalloc.cfg SPEC/config
 cd SPEC
 . ./shrc   
+runspec --config=aarch64.cfg --action=build all -I
+runspec --config=arm-gem5-dlmalloc.cfg --action=build all -I 
 runspec --config=aarch64.cfg --action=run --size=ref all -I --iterations=1
 runspec --config=arm-gem5-dlmalloc.cfg --action=run --size=ref all -I --iterations=1
 cd $BASE/scripts

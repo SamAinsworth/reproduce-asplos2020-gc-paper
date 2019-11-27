@@ -102,3 +102,5 @@ Troubleshooting
 
 * We had an issue on recent Linux glibc variants with compiling m5threads (for the Sanitizer guardian kernel). To this end, the make command is commented out in our buildscript, and the object file for m5threads preshipped. If this causes issues, please try to rebuild m5threads (guardian_kernels/sanitizer/m5threads-master) and if that doesn't sort the issue report it to the authors.
 
+* You may have to specify a toolset when SPEC is being built. We chose linux-suse101-AMD64.
+

@@ -14,11 +14,11 @@ do
   BIN=$(grep $bench $BASE/spec_confs/binaries.txt | awk -F':' '{print $2}')
   ARGS=$(grep $bench $BASE/spec_confs/args.txt | awk -F':' '{print $2}')
   cd *$bench/run/run_base_ref_aarch64.0000
-  $BASE/scripts/gem5_scripts/run_cfi.sh $BIN.aarch64 "$ARGS" "$IN" "$BOUNDS"
-  $BASE/scripts/gem5_scripts/run_counter.sh $BIN.aarch64 "$ARGS" "$IN"
-  $BASE/scripts/gem5_scripts/run_rowhammer.sh $BIN.aarch64 "$ARGS" "$IN"
-  $BASE/scripts/gem5_scripts/run_shadow.sh $BIN.aarch64 "$ARGS" "$IN"
+  $BASE/scripts/gem5_scripts/run_cfi.sh ./$BIN.aarch64 "$ARGS" "$IN" "$BOUNDS"
+  $BASE/scripts/gem5_scripts/run_counter.sh ./$BIN.aarch64 "$ARGS" "$IN"
+  $BASE/scripts/gem5_scripts/run_rowhammer.sh ./$BIN.aarch64 "$ARGS" "$IN"
+  $BASE/scripts/gem5_scripts/run_shadow.sh ./$BIN.aarch64 "$ARGS" "$IN"
   cd ../run_base_ref_armdlmalloc.0000
-  $BASE/scripts/gem5_scripts/run_sanitizer.sh $BIN.armdlmalloc "$ARGS" "$IN") &
+  $BASE/scripts/gem5_scripts/run_sanitizer.sh ./$BIN.armdlmalloc "$ARGS" "$IN") &
 done
 cd $BASE/scripts

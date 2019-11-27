@@ -245,6 +245,8 @@ if options.simpoint_profile:
 for i in xrange(np):
     if options.smt:
         system.cpu[i].workload = multiprocesses
+    elif len(multiprocesses) < np:
+        system.cpu[i].workload = multiprocesses[0]
     elif i < options.num_main_cores:
         system.cpu[i].workload = multiprocesses[0]
     else:

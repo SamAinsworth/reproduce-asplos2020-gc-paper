@@ -1,7 +1,7 @@
 cd ../guardian_kernels/sanitizer
 ./build.sh
 cd m5threads-master
-make
+#make
 cd ../..
 aarch64-linux-gnu-gcc -O3 -static controlflow.c -o controlflow
 aarch64-linux-gnu-gcc -O3 -static controlflow_fine.c -o controlflow_fine

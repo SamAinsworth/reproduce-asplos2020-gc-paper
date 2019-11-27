@@ -655,7 +655,8 @@ if main['GCC'] or main['CLANG']:
     main.Append(CCFLAGS=['-Wall', '-Wundef', '-Wextra',
                          '-Wno-sign-compare', '-Wno-unused-parameter'])
     main.Append(CXXFLAGS=['-Wno-implicit-fallthrough'])      
-    main.Append(CXXFLAGS=['-Wno-expansion-to-defined'])                   
+    main.Append(CXXFLAGS=['-Wno-expansion-to-defined'])     
+    main.Append(CXXFLAGS=['-Wno-bool-operation'])                   
     # We always compile using C++11
     main.Append(CXXFLAGS=['-std=c++11'])
 else:

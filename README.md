@@ -26,7 +26,7 @@ You can install this repository as follows:
 git clone https://github.com/SamAinsworth/reproduce-asplos2020-gc-paper
 ```
 
-All scripts from here onwards are assumed to be run from the scripts directory, from the room of the repository:
+All scripts from here onwards are assumed to be run from the scripts directory, from the root of the repository:
 ```
 cd reproduce-asplos2020-gc-paper
 cd scripts
@@ -81,13 +81,13 @@ This will extract the data from the simulation runs' m5out/stats.txt files, and 
 The raw data will be accessible in the run directories within the spec folder, as stats*.txt and delays*.txt.
 
 
-If anything in unclear, or any unexpected results occur, please report it to the authors.
+If anything is unclear, or any unexpected results occur, please report it to the authors.
 
 Authors
 =======
 S. Ainsworth and T. M. Jones
 
-Acknowledgments
+Acknowledgements
 ===============
 This work was supported by the Engineering and Physical Sciences Research Council (EPSRC), through grant references EP/K026399/1, EP/P020011/1 and EP/M506485/1, and ARM Ltd.
 

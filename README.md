@@ -63,7 +63,7 @@ Once everything is successfully built, from the scripts file run
 ./run_spec.sh
 ```
 
-to resimulate the Guardian Council's experiments. This will take several hours to a day, depending on the amount of RAM and number of cores on your system. By default, the script will run as many workloads in parallel as you have physical cores, as long as you have enough RAM to do so. To change this default, alter the value of 'P' inside run_spec.sh.
+to resimulate the Guardian Council's experiments. This will take around a day, depending on the amount of RAM and number of cores on your system. By default, the script will run as many workloads in parallel as you have physical cores, as long as you have enough RAM to do so. To change this default, alter the value of 'P' inside run_spec.sh.
 
 If any unexpected behaviour is observed, please report it to the authors.
 

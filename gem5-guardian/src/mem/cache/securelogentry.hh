@@ -147,7 +147,7 @@ class securelogentry {
                         for (int x=0; x<NUMBEROFHISTOENTRIES; x++) {
                                         histoEntry h = histoEntries[x];
                                         std::cout << (x*maxHistoSize) / NUMBEROFHISTOENTRIES << " : " << h.number << " : " << ((h.minimum == (uint64_t) -1)? 0ul : h.minimum) << " : " << h.maximum << " : " << (h.number==0? 0ul : h.mean/h.number) << std::endl;
-										outfile << (h.number==0? 0ul : h.mean/h.number) << " " << h.number << std::endl;
+										outfile << (h.number==0? (x*maxHistoSize) / NUMBEROFHISTOENTRIES : h.mean/h.number) << " " << h.number << std::endl;
                     }
                     histoEntry h = bigBucket;
                      std::cout << "bigbucket : " << h.number << " : " << ((h.minimum == (uint64_t) -1)? 0ul : h.minimum) << " : " << h.maximum << " : " << (h.number==0? 0ul : h.mean/h.number) << std::endl;

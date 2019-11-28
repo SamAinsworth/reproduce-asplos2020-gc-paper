@@ -7,7 +7,7 @@ M=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 G=$(expr $M / 2097152)
 P=$((G<N ? G : N))
 i=0
-for bench in bwaves bzip2 cactusADM calculix gcc GemsFDTD gobmk h264ref lbm leslie3d mcf milc namd omnetpp povray sjeng tonto wrf xalancbmk
+for bench in astar bwaves bzip2 cactusADM calculix gcc GemsFDTD gobmk h264ref lbm leslie3d mcf milc namd omnetpp povray sjeng tonto wrf xalancbmk
 do
   ((i=i%P)); ((i++==0)) && wait
   (

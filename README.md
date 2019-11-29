@@ -117,6 +117,8 @@ export BASE=*YOUR_ARTEFACT_ROOT*
 
 The *nofwd variants can be used to run full short workloads. The others are used to fast forward and sample (as is necessary for longer workloads such as SPEC).
 
+Workloads should be for Aarch64 or Aarch32, and statically linked, to run on the simulator. For shared-memory Guardian Kernels (Sanitizer in our existing set), you must compile in the allocator: see bitcount's Makefile for more information.
+
 * Guardian Kernels: You can create new Guardian Kernels to evaluate on the simulator. These are written as standard C/C++ programs, with custom instructions (typically implemented as inline ASM, but can be imported from the m5ops list - see the example kernels for more information) for FIFO queues and setup. The Filter and Mapper are programmed with secmap.ini files in the root of your simulation run directory. An example of how this is programmed is given in guardian_kernels/example_filter_map.ini. Multiple kernels can be run simultaneously by adding further lines to secmap.ini.
 
 * Simulator: Much of the code for the Guardian Council is implemented in gem5-guardian/src/mem/cache/securelogentry.hh and .cc. The commit path of the O3CPU (src/cpu/o3/commit_impl.hh) can be altered to add further observation channels. If you would like further information on modifying the simulator, please contact the authors.

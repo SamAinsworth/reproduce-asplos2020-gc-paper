@@ -130,3 +130,5 @@ Troubleshooting
 
 * You may have to specify a toolset when SPEC is being built. We chose linux-suse101-AMD64.
 
+* The gnuplot scripts will issue several warnings for the small evaluation - these can be ignored, and are caused by using the same scripts as the full evaluation.
+

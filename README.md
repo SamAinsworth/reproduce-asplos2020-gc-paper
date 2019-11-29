@@ -63,7 +63,7 @@ For a quick evaluation, once everything bar SPEC is built, from the scripts file
 ./run_bitcount.sh
 ```
 
-This will run a short, but representative open source workload which will cause a significant amount of compute from the Guardian Kernels, and can be completed in around 2 hours.
+This will run a short, but representative open source workload which will induce a significant amount of compute from the Guardian Kernels, and can be completed in around 2 hours.
 
 
 For the full evaluation, with the SPEC CPU2006 workloads from the paper, run

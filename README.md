@@ -91,7 +91,7 @@ or for the full evaluation:
 ./plot_spec.sh
 ```
 
-This will extract the data from the simulation runs' m5out/stats.txt files, and plot it using gnuplot. The plots themselves will be in the folder plots, and the data covered should look broadly similar to the plots for figures 4 and 7 from the paper.
+This will extract the data from the simulation runs' m5out/stats.txt files, and plot it using gnuplot. The plots themselves will be in the folder plots, and the data covered should look broadly similar to the plots for figures 4 and 7 from the paper.  As for the small evaluation, bitcount was not included in the original paper, we have provided sample data and results in the folder sample_plots.
 
 The raw data will be accessible in the run directories within the spec or bitcount folder, as stats*.txt and delays*.txt.
 

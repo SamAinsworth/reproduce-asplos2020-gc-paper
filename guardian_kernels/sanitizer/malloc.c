@@ -235,99 +235,6 @@
 
 #include <pthread.h>
 
-
-
-
-#define GEM5
-
-char shadow[32*1024*1024];
-
-#ifdef GEM5
-void *checker_main(void *param) {
-(void)param;	
-while(1) {
-
-  unsigned int pc;
-      asm volatile("mov R0, #0x2;.word	0xEE560110; mov %0, R0" : "=r" (pc) : : "r0" );
-
-  unsigned int address;// = m5_pop_queue(1);
-      asm volatile("mov R0, #0x1\n\t.word 0xEE570110\n\t mov %0, R0" : "=r" (address) : : "r0", "r1" );
-  
-  char bits = shadow[(address)>>7];
-  
-  if(!bits) continue;
-  
-  if(bits & (1<<((address >> 7)&8))) {
-  		    //send error to terminal
-  	            asm volatile("mov R0, %0\n\t.word 0xEE5C0110" :  : "r" (address) : "r0" );
-  	            asm volatile("mov R0, %0\n\t.word 0xEE5C0110" :  : "r" (pc) : "r0" );
-  }
-  
-}
-
-}
-
-int inited_checker_cores=0;
-void init_checker_cores() {
-	for(int x=0;x<12;x++) {
-		pthread_t thread;
-		pthread_create(&thread, NULL,
-                          checker_main, NULL);
-	}
-	inited_checker_cores=1;
-}
-#endif
-
-void poison(void* start, size_t bytes) {
-#ifdef GEM5
-	asm volatile(".word 0xEE5D0110" : : : );
-	//drain_checkers();
-	if(!inited_checker_cores) init_checker_cores();
-#endif
-	char* start_s = &shadow[((long)start)>>7];
-	char* end_s = &shadow[((long)(start+bytes))>>7];
-	
-	int misalign_end = ((long)end_s) & 8;
-	if(misalign_end){
-		*end_s |= ((255<<misalign_end)>>8);
-		bytes-=misalign_end;
-	}
-	int misalign = ((long)start_s)&8;
-	if(misalign){
-		*start_s |= ((255<<8)>>misalign);
-		start_s++;
-		bytes-=misalign;
-	}
-	for(;start_s<end_s;start_s++) {
-		*start_s=-1;
-	}
-}
-
-void unpoison(void* start, size_t bytes) {
-#ifdef GEM5
-	asm volatile(".word 0xEE5D0110" : : : );
-	//drain_checkers();
-#endif
-	char* start_s = &shadow[((long)start)>>7];
-	char* end_s = &shadow[((long)(start+bytes))>>7];
-	
-	int misalign_end = ((long)end_s) & 8;
-	if(misalign_end){
-		*end_s &= ~((255<<misalign_end)>>8);
-		bytes-=misalign_end;
-	}
-	int misalign = ((long)start_s)&8;
-	if(misalign){
-		*start_s &= ~((255<<8)>>misalign);
-		start_s++;
-		bytes-=misalign;
-	}
-	for(;start_s<end_s;start_s++) {
-		*start_s=0;
-	}
-}
-
-
 #ifdef WIN32
 
 #define WIN32_LEAN_AND_MEAN
@@ -1668,6 +1575,95 @@ static pthread_mutex_t mALLOC_MUTEx = PTHREAD_MUTEX_INITIALIZER;
 #define MALLOC_POSTACTION  (0)
 
 #endif
+
+//#define GEM5
+
+char shadow[32*1024*1024];
+
+#ifdef GEM5
+void *checker_main(void *param) {
+(void)param;	
+while(1) {
+
+  unsigned int pc;
+      asm volatile("mov R0, #0x2;.word	0xEE560110; mov %0, R0" : "=r" (pc) : : "r0" );
+
+  unsigned int address;// = m5_pop_queue(1);
+      asm volatile("mov R0, #0x1\n\t.word 0xEE570110\n\t mov %0, R0" : "=r" (address) : : "r0", "r1" );
+  
+  char bits = shadow[(address)>>7];
+  
+  if(!bits) continue;
+  
+  if(bits & (1<<((address >> 7)&8))) {
+  		    //send error to terminal
+  	            asm volatile("mov R0, %0\n\t.word 0xEE5C0110" :  : "r" (address) : "r0" );
+  	            asm volatile("mov R0, %0\n\t.word 0xEE5C0110" :  : "r" (pc) : "r0" );
+  }
+  
+}
+
+}
+
+int inited_checker_cores=0;
+void init_checker_cores() {
+	for(int x=0;x<12;x++) {
+		pthread_t thread;
+		pthread_create(&thread, NULL,
+                          checker_main, NULL);
+	}
+	inited_checker_cores=1;
+}
+#endif
+
+void poison(void* start, size_t bytes) {
+#ifdef GEM5
+	asm volatile(".word 0xEE5D0110" : : : );
+	//drain_checkers();
+	if(!inited_checker_cores) init_checker_cores();
+#endif
+	char* start_s = &shadow[((long)start)>>7];
+	char* end_s = &shadow[((long)(start+bytes))>>7];
+	
+	int misalign_end = ((long)end_s) & 8;
+	if(misalign_end){
+		*end_s |= ((255<<misalign_end)>>8);
+		bytes-=misalign_end;
+	}
+	int misalign = ((long)start_s)&8;
+	if(misalign){
+		*start_s |= ((255<<8)>>misalign);
+		start_s++;
+		bytes-=misalign;
+	}
+	for(;start_s<end_s;start_s++) {
+		*start_s=-1;
+	}
+}
+
+void unpoison(void* start, size_t bytes) {
+#ifdef GEM5
+	asm volatile(".word 0xEE5D0110" : : : );
+	//drain_checkers();
+#endif
+	char* start_s = &shadow[((long)start)>>7];
+	char* end_s = &shadow[((long)(start+bytes))>>7];
+	
+	int misalign_end = ((long)end_s) & 8;
+	if(misalign_end){
+		*end_s &= ~((255<<misalign_end)>>8);
+		bytes-=misalign_end;
+	}
+	int misalign = ((long)start_s)&8;
+	if(misalign){
+		*start_s &= ~((255<<8)>>misalign);
+		start_s++;
+		bytes-=misalign;
+	}
+	for(;start_s<end_s;start_s++) {
+		*start_s=0;
+	}
+}
 
 Void_t* public_mALLOc(size_t bytes) {
   Void_t* m;
@@ -3815,7 +3811,6 @@ Void_t* mALLOc(size_t bytes)
 /*
   ------------------------------ free ------------------------------
 */
-
 
 #if __STD_C
 void fREe(Void_t* mem)

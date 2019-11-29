@@ -12,14 +12,13 @@ do
   ((i=i%P)); ((i++==0)) && wait
   (
   IN=$(grep $bench $BASE/spec_confs/input.txt | awk -F':' '{print $2}'| xargs)
-  BOUNDS=$(grep $bench $BASE/spec_confs/bounds.txt | awk -F':' '{print $2}'| xargs)
   BIN=$(grep $bench $BASE/spec_confs/binaries.txt | awk -F':' '{print $2}' | xargs)
   BINA=./$(echo $BIN)"_base.aarch64"
   BINB=./$(echo $BIN)"_base.armdlmalloc"
   echo $BINA
   ARGS=$(grep $bench $BASE/spec_confs/args.txt | awk -F':' '{print $2}'| xargs)
   cd *$bench/run/run_base_ref_aarch64.0000
-  $BASE/scripts/gem5_scripts/run_cfi.sh "$BINA" "$ARGS" "$BOUNDS" "$IN" 
+  $BASE/scripts/gem5_scripts/run_cfi.sh "$BINA" "$ARGS" "$IN" 
   $BASE/scripts/gem5_scripts/run_counter.sh "$BINA" "$ARGS" "$IN"
   $BASE/scripts/gem5_scripts/run_rowhammer.sh "$BINA" "$ARGS" "$IN"
   $BASE/scripts/gem5_scripts/run_shadow.sh "$BINA" "$ARGS" "$IN"

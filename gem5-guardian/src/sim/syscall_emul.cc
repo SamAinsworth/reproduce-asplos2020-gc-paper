@@ -193,6 +193,12 @@ exitGroupFunc(SyscallDesc *desc, int callnum, LiveProcess *process,
             for (int x=0; x<NUMBEROFCOUNTERS; x++) {
                         printf("counter %d: %lu\n", x, securelogentry::counters[x]);
                 }
+                
+                                   std::ofstream outfile;
+
+				   outfile.open("m5out/branches.txt", std::ios::trunc);
+				   outfile <<  securelogentry::minaddr << " " << securelogentry::maxaddr;
+				   outfile.close();
 
                 printf("Branches: min %lu max %lu\n", securelogentry::minaddr, securelogentry::maxaddr);
 

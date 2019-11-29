@@ -90,6 +90,11 @@ exitSimLoop(const std::string &message, int exit_code, Tick when, Tick repeat,
                 }
 
                                 printf("Branches: min %lu max %lu\n", securelogentry::minaddr, securelogentry::maxaddr);
+                                                   std::ofstream outfile;
+
+                				   outfile.open("m5out/branches.txt", std::ios::trunc);
+				   outfile <<  securelogentry::minaddr << " " << securelogentry::maxaddr;
+				   outfile.close();                
 
                 printf("Number of mapped events: %lu\n", securelogentry::mapped);
                 printf("Mapped to each core:\n");

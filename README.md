@@ -63,7 +63,7 @@ For a quick evaluation, once everything bar SPEC is built, from the scripts file
 ./run_bitcount.sh
 ```
 
-This will run a short, but representative open source workload which will cause a significant amount of compute from the Guardian Kernels, and can be completed in around 2 hours.
+This will run a short, but representative open source workload which will induce a significant amount of compute from the Guardian Kernels, and can be completed in around 2 hours.
 
 
 For the full evaluation, with the SPEC CPU2006 workloads from the paper, run
@@ -91,7 +91,7 @@ or for the full evaluation:
 ./plot_spec.sh
 ```
 
-This will extract the data from the simulation runs' m5out/stats.txt files, and plot it using gnuplot. The plots themselves will be in the folder plots, and the data covered should look broadly similar to the plots for figures 4 and 7 from the paper.
+This will extract the data from the simulation runs' m5out/stats.txt files, and plot it using gnuplot. The plots themselves will be in the folder plots, and the data covered should look broadly similar to the plots for figures 4 and 7 from the paper.  For the small evaluation, bitcount was not included in the original paper, and so we have provided sample data and results in the folder sample_plots.
 
 The raw data will be accessible in the run directories within the spec or bitcount folder, as stats*.txt and delays*.txt.
 
@@ -117,6 +117,8 @@ export BASE=*YOUR_ARTEFACT_ROOT*
 
 The *nofwd variants can be used to run full short workloads. The others are used to fast forward and sample (as is necessary for longer workloads such as SPEC).
 
+Workloads should be for Aarch64 or Aarch32, and statically linked, to run on the simulator. For shared-memory Guardian Kernels (Sanitizer in our existing set), you must compile the allocator into the binary: see bitcount's Makefile for more information.
+
 * Guardian Kernels: You can create new Guardian Kernels to evaluate on the simulator. These are written as standard C/C++ programs, with custom instructions (typically implemented as inline ASM, but can be imported from the m5ops list - see the example kernels for more information) for FIFO queues and setup. The Filter and Mapper are programmed with secmap.ini files in the root of your simulation run directory. An example of how this is programmed is given in guardian_kernels/example_filter_map.ini. Multiple kernels can be run simultaneously by adding further lines to secmap.ini.
 
 * Simulator: Much of the code for the Guardian Council is implemented in gem5-guardian/src/mem/cache/securelogentry.hh and .cc. The commit path of the O3CPU (src/cpu/o3/commit_impl.hh) can be altered to add further observation channels. If you would like further information on modifying the simulator, please contact the authors.
@@ -127,4 +129,6 @@ Troubleshooting
 * We had an issue on recent Linux kernels with compiling m5threads (for the Sanitizer guardian kernel). To this end, the make command is commented out in our buildscript, and the object file for m5threads preshipped. If this causes issues, please try to rebuild m5threads (guardian_kernels/sanitizer/m5threads-master) and if that doesn't solve the issue report it to the authors.
 
 * You may have to specify a toolset when SPEC is being built. We chose linux-suse101-AMD64.
+
+* The gnuplot scripts will issue several warnings for the small evaluation - these can be ignored, and are caused by using the same scripts as the full evaluation.
 

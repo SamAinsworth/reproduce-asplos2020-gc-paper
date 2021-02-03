@@ -132,3 +132,10 @@ Troubleshooting
 
 * The gnuplot scripts will issue several warnings for the small evaluation - these can be ignored, and are caused by using the same scripts as the full evaluation.
 
+* If you receive an error of the form "-Werror=class-memaccess" when compiling gem5, try adding the following line to the SConscript in gem5-guardian, after line 662 and with the same indentation as line 662:
+
+```
+main.Append(CXXFLAGS=['-Wno-error=class-memaccess'])
+main.Append(CXXFLAGS=['-Wno-error=ignored-qualifiers'])
+```
+
